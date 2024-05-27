@@ -6,14 +6,17 @@ namespace MyWebApplication2.Models
 {
     public class ProductTableModel
     {
+        // Properties for the product
         public int ProductID { get; set; }
         public string ProductName { get; set; }
         public decimal ProductPrice { get; set; }
         public string ProductAvailability { get; set; }
         public string ProductCategory { get; set; }
 
+        // Connection string for the database
         public static string ConString { get; } = "Server=tcp:ice1h-sql-sever.database.windows.net,1433;Initial Catalog=ice1h-sql-databse;Persist Security Info=False;User ID=Heath;Password=Jamie0406.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
+        // Method to insert a new product into the database
         public int InsertProduct(ProductTableModel p)
         {
             try
@@ -38,6 +41,7 @@ namespace MyWebApplication2.Models
             }
         }
 
+        // Method to get all products from the database
         public static List<ProductTableModel> GetAllProducts()
         {
             List<ProductTableModel> products = new List<ProductTableModel>();
@@ -66,6 +70,7 @@ namespace MyWebApplication2.Models
             return products;
         }
 
+        // Method to get a product by its ID from the database
         public static ProductTableModel GetProductByID(int productID)
         {
             using (var connection = new SqlConnection(ConString))
@@ -89,5 +94,4 @@ namespace MyWebApplication2.Models
             return null;
         }
     }
-
 }
