@@ -9,21 +9,26 @@ namespace MyWebApplication2.Controllers
     {
         private readonly ILogger<ProductDisplayController> _logger;
 
+        // Constructor to initialise the logger
         public ProductDisplayController(ILogger<ProductDisplayController> logger)
         {
             _logger = logger;
         }
 
+        // Action to display the list of all products
         [HttpGet]
         public IActionResult Index()
         {
             var products = ProductTableModel.GetAllProducts();
+            // Render the Index view with the list of products
             return View(products);
         }
 
+        // Action to add a new product
         [HttpPost]
         public IActionResult AddProduct(ProductTableModel product)
         {
+            // Check if the model state is valid
             if (ModelState.IsValid)
             {
                 try
@@ -43,8 +48,10 @@ namespace MyWebApplication2.Controllers
                     _logger.LogError(ex, "Error adding product.");
                 }
 
+                // Redirect to the Home Index action after adding the product
                 return RedirectToAction("Index", "Home");
             }
+            // If the model state is invalid, render the MyWork view again
             return View("MyWork");
         }
     }
