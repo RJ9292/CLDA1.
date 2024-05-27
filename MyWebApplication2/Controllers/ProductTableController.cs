@@ -7,13 +7,15 @@ namespace MyWebApplication2.Controllers
     {
         public Models.ProductTableModel prodtbl = new Models.ProductTableModel();
 
+        // Action to handle adding a new product and redirecting to the Home index
         [HttpPost]
         public ActionResult MyWork(Models.ProductTableModel products)
         {
-            var result2 = prodtbl.InsertProduct(products); // Corrected method name
+            var result2 = prodtbl.InsertProduct(products); // Insert the product into the database
             return RedirectToAction("Index", "Home");
         }
 
+        // Action to display the MyWork view with the product table model
         [HttpGet]
         public ActionResult MyWork()
         {
