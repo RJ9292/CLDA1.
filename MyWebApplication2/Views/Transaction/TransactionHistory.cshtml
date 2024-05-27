@@ -1,0 +1,43 @@
+﻿@model List<MyWebApplication2.Models.TransactionModel>
+
+@{
+    ViewData["Title"] = "Transaction History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Transaction History</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>User ID</th>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Order Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model)
+            {
+                <tr>
+                    <td>@transaction.TransactionID</td>
+                    <td>@transaction.UserID</td>
+                    <td>@transaction.ProductID</td>
+                    <td>@transaction.ProductName</td>
+                    <td>@transaction.Quantity</td>
+                    <td>@transaction.ProductPrice</td>
+                    <td>@transaction.OrderDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No transactions found.</p>
+}

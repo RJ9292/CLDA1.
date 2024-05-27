@@ -6,7 +6,7 @@ namespace MyWebApplication2.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View("~/Views/MyWork/MyWork.cshtml");
         }
     }
 }

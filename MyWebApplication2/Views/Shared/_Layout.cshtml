@@ -6,55 +6,49 @@
     <title>@ViewData["Title"] - Khumalo Craft</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 
-   
-   <style>
+    <style>
         body {
             font-family: Arial, sans-serif;
-            background-color:grey!important; 
+            background-color: grey !important;
             color: white;
             margin: 0;
             padding: 0;
         }
 
-        /* Header styles */
         header {
-            background-color:grey;
+            background-color: grey;
             color: white;
             padding: 10px 0;
             text-align: center;
         }
 
-        /* Navigation styles */
         nav {
             background-color: grey;
             padding: 10px 0;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-right: 20px;
-        }
+            nav a {
+                color: white;
+                text-decoration: none;
+                margin-right: 20px;
+            }
 
-        /* Main content styles */
         .container {
             max-width: 1200px;
             margin: 20px auto;
             padding: 0 20px;
+            margin-bottom: 80px; /* Add margin at the bottom */
         }
 
-        /* Footer styles */
         footer {
             background-color: grey;
             color: white;
             text-align: center;
             padding: 10px 0;
-            position: fixed;
-            bottom: 0;
             width: 100%;
+            position: relative; /* Adjust to relative positioning */
+            bottom: 0;
         }
     </style>
 </head>
@@ -70,22 +64,34 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="SignUp">Sign Up</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Contact Us</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="About">About Us</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="MyWork" asp-action="Index">My Work</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="MyWork" asp-action="Index">MyWork</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Transaction" asp-action="TransactionHistory">Transaction History</a>
+                        </li>
+                        @if (!string.IsNullOrEmpty(ViewBag.UserName) && !string.IsNullOrEmpty(ViewBag.UserID))
+                        {
+                            <li class="nav-item">
+                                <form asp-controller="User" asp-action="Logout" method="post" class="form-inline">
+                                    <button type="submit" class="btn btn-link nav-link" style="padding: 0;">Logout</button>
+                                </form>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

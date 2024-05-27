@@ -1,0 +1,61 @@
+﻿@model List<MyWebApplication2.Models.ProductTableModel>
+
+@{
+    ViewData["Title"] = "My Work";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>My Work</h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <img src="/Img/Chair.jpg" alt="Chair" style="max-width: 100%; height: auto;" />
+        <div class="caption">Antique Restored Chair</div>
+        <p>
+            Handcrafted from rich, solid wood, its intricate details and delicate carvings showcase the artistry.
+            The chair's graceful curves and sturdy construction exude both charm and durability, making it a perfect addition to any vintage-inspired decor.
+        </p>
+    </div>
+    <div class="col-md-3">
+        <img src="/Img/Lofted chair.jpg" alt="LoftedChair" style="max-width: 100%; height: auto;" />
+        <div class="caption">Lofted Chair</div>
+        <p>Handcrafted loft chair made from stained oak wood. Perfect for outdoor conditions, a centerpiece for your lounging area.</p>
+    </div>
+    <div class="col-md-3">
+        <img src="/Img/Rustic.jpg" alt="Rustic" style="max-width: 100%; height: auto;" />
+        <div class="caption">Artisan Wooden Table</div>
+        <p>Add a touch of rustic charm to your living room with this wooden coffee table.</p>
+    </div>
+    <div class="col-md-3">
+        <img src="/Img/Table.jpg" alt="Table" style="max-width: 100%; height: auto;" />
+        <div class="caption">Long Dining Table</div>
+        <p>
+            Crafted from solid wood, this classic dining table exudes warmth and elegance.
+            Its timeless design features clean lines and a rich, natural finish, making it a versatile choice for any dining room.
+        </p>
+    </div>
+    <div>Heath Coetsee St10304272</div>
+</div>
+
+<hr />
+
+<h2>Add a New Product</h2>
+<form asp-action="AddProduct" asp-controller="ProductDisplay" method="post">
+    <div class="form-group">
+        <label for="ProductName">Product Name</label>
+        <input type="text" class="form-control" id="ProductName" name="ProductName" required />
+    </div>
+    <div class="form-group">
+        <label for="ProductPrice">Product Price</label>
+        <input type="number" class="form-control" id="ProductPrice" name="ProductPrice" required />
+    </div>
+    <div class="form-group">
+        <label for="ProductCategory">Product Category</label>
+        <input type="text" class="form-control" id="ProductCategory" name="ProductCategory" required />
+    </div>
+    <div class="form-group">
+        <label for="ProductAvailability">Product Availability</label>
+        <input type="text" class="form-control" id="ProductAvailability" name="ProductAvailability" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Add Product</button>
+</form>

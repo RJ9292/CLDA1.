@@ -1,24 +1,48 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using MyWebApplication2.Models;
 
 namespace MyWebApplication2.Controllers
 {
     public class UserController : Controller
     {
-
-        public Table_1 userTB = new Table_1();
+        private readonly UserTable userTB = new UserTable();
 
         [HttpPost]
-        public ActionResult About(Table_1 Users)
+        public ActionResult Login(UserTable Users)
         {
-            var result = userTB.insert_User(Users);
+            var user = userTB.Login(Users.Email, Users.Password);
+            if (user != null)
+            {
+                HttpContext.Session.SetInt32("UserID", user.UserID);
+                HttpContext.Session.SetString("UserName", user.Name);
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Invalid email or password.";
+                return View("~/Views/User/Login.cshtml");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
-        [HttpGet]
 
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult SignUp()
         {
-            return View(userTB);
+            return View("~/Views/User/SignUp.cshtml");
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View("~/Views/User/Login.cshtml", new UserTable());
         }
     }
 }

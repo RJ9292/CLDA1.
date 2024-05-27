@@ -1,0 +1,48 @@
+﻿@model List<MyWebApplication2.Models.CartItemModel>
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h2>Your Cart</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.ProductPrice</td>
+                    <td>@(item.ProductPrice * item.Quantity)</td>
+                    <td>
+                        <!-- Add buttons for update or remove if necessary -->
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <form asp-action="ProceedWithOrder" method="post">
+        <button type="submit" class="btn btn-primary">Proceed with Order</button>
+    </form>
+
+    <form asp-action="ClearCart" method="post" style="margin-top: 10px;">
+        <button type="submit" class="btn btn-danger">Clear Cart</button>
+    </form>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}
