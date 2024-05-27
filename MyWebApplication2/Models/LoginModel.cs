@@ -5,9 +5,10 @@ namespace MyWebApplication2.Models
 {
     public class LoginModel
     {
-        public static string con_string = "Integrated Security=SSPI;Persist Security Info=False;User ID=\"\";Initial Catalog=test;Data Source=labVMH8OX\\SQLEXPRESS";
+        // Connection string for the database
+        public static string con_string = "Server=tcp:ice1h-sql-sever.database.windows.net,1433;Initial Catalog=ice1h-sql-databse;Persist Security Info=False;User ID=Heath;Password=Jamie0406.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-
+        // Method to check if a user exists in the database
         public int SelectUser(string email, string name)
         {
             int userId = -1; // Default value if user is not found
@@ -23,7 +24,7 @@ namespace MyWebApplication2.Models
                     object result = cmd.ExecuteScalar();
                     if (result != null && result != DBNull.Value)
                     {
-                        userId = Convert.ToInt32(result);
+                        userId = Convert.ToInt32(result); // Get the user ID if found
                     }
                 }
                 catch (Exception ex)
@@ -33,8 +34,7 @@ namespace MyWebApplication2.Models
                     throw ex;
                 }
             }
-            return userId;
+            return userId; // Return the user ID or -1 if not found
         }
-
     }
 }
