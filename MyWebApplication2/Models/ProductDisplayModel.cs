@@ -7,15 +7,17 @@ namespace MyWebApplication2.Models
 {
     public class ProductDisplayModel
     {
+        // Properties for the product
         public int ProductID { get; set; }
         public string ProductName { get; set; }
         public decimal ProductPrice { get; set; }
         public string ProductCategory { get; set; }
         public bool ProductAvailability { get; set; }
 
+        // Default constructor
         public ProductDisplayModel() { }
 
-        //Parameterized Constructor: This constructor takes five parameters (id, name, price, category, availability) and initializes the corresponding properties of ProductDisplayModel with the provided values.
+        // Parameterised constructor
         public ProductDisplayModel(int id, string name, decimal price, string category, bool availability)
         {
             ProductID = id;
@@ -25,11 +27,13 @@ namespace MyWebApplication2.Models
             ProductAvailability = availability;
         }
 
+        // Method to get all products from the database
         public static List<ProductDisplayModel> SelectProducts()
         {
             List<ProductDisplayModel> products = new List<ProductDisplayModel>();
 
-            string con_string = "Integrated Security=SSPI;Persist Security Info=False;User ID=\"\";Initial Catalog=test;Data Source=labVMH8OX\\SQLEXPRESS";
+            // Connection string for the database
+            string con_string = "Server=tcp:ice1h-sql-sever.database.windows.net,1433;Initial Catalog=ice1h-sql-databse;Persist Security Info=False;User ID=Heath;Password=Jamie0406.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             using (SqlConnection con = new SqlConnection(con_string))
             {
                 string sql = "SELECT ProductID, ProductName, ProductPrice, ProductCategory, ProductAvailability FROM productTable";
