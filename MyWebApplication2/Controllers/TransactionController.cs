@@ -12,19 +12,24 @@ namespace MyWebApplication2.Controllers
     {
         private readonly ILogger<TransactionController> _logger;
 
+        // Constructor to initialize the logger
         public TransactionController(ILogger<TransactionController> logger)
         {
             _logger = logger;
         }
 
+        // Action to display the transaction history for the logged-in user
         [HttpGet]
         public IActionResult TransactionHistory()
         {
+            // Get the user ID from the session
             int? userID = HttpContext.Session.GetInt32("UserID");
             if (userID.HasValue)
             {
                 var userNumericID = Convert.ToDecimal(userID.Value);
                 var transactions = new List<TransactionModel>();
+
+                // Retrieve the transaction history from the database
                 using (var connection = new SqlConnection(ProductTableModel.ConString))
                 {
                     connection.Open();
@@ -46,10 +51,13 @@ namespace MyWebApplication2.Controllers
                         });
                     }
                 }
+
+                // Render the TransactionHistory view with the list of transactions
                 return View("~/Views/Transaction/TransactionHistory.cshtml", transactions);
             }
             else
             {
+                // Redirect to login if the user is not logged in
                 return RedirectToAction("Login", "User");
             }
         }
