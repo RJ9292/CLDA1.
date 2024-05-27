@@ -6,6 +6,7 @@ namespace MyWebApplication2.Models
 {
     public class TransactionModel
     {
+        // Properties of the transaction
         public int TransactionID { get; set; }
         public decimal UserID { get; set; }
         public int ProductID { get; set; }
@@ -14,6 +15,7 @@ namespace MyWebApplication2.Models
         public decimal ProductPrice { get; set; }
         public DateTime OrderDate { get; set; }
 
+        // Method to insert a new transaction into the database
         public int InsertTransaction(TransactionModel transaction)
         {
             using (var connection = new SqlConnection(ProductTableModel.ConString))
@@ -31,10 +33,12 @@ namespace MyWebApplication2.Models
                 command.Parameters.AddWithValue("@ProductPrice", transaction.ProductPrice);
                 command.Parameters.AddWithValue("@OrderDate", transaction.OrderDate);
 
+                // Execute the SQL command and return the number of rows affected
                 return command.ExecuteNonQuery();
             }
         }
 
+        // Method to get all transactions for a specific user from the database
         public List<TransactionModel> GetUserTransactions(decimal userID)
         {
             var transactions = new List<TransactionModel>();
