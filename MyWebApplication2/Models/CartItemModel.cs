@@ -16,15 +16,17 @@ namespace MyWebApplication2.Models
         public string ProductCategory { get; set; }
         public string ProductAvailability { get; set; }
 
+        // Connection string for the database
         private static string connectionString = "Server=tcp:ice1h-sql-sever.database.windows.net,1433;Initial Catalog=ice1h-sql-databse;Persist Security Info=False;User ID=Heath;Password=Jamie0406.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         private readonly ILogger<CartItemModel> _logger;
 
-        // Restore the logger in the constructor
+        // Constructor to initialize the logger
         public CartItemModel(ILogger<CartItemModel> logger)
         {
             _logger = logger;
         }
 
+        // Method to add an item to the cart
         public int AddToCart(CartItemModel cartItem)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -53,6 +55,7 @@ namespace MyWebApplication2.Models
             }
         }
 
+        // Method to get all items in the user's cart
         public List<CartItemModel> GetUserCartItems(int userID)
         {
             List<CartItemModel> cartItems = new List<CartItemModel>();
@@ -96,6 +99,7 @@ namespace MyWebApplication2.Models
             return cartItems;
         }
 
+        // Method to update the quantity of an item in the cart
         public int UpdateCartItem(int cartID, int quantity)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -119,6 +123,7 @@ namespace MyWebApplication2.Models
             }
         }
 
+        // Method to clear all items from the user's cart
         public void ClearUserCart(int userID)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
